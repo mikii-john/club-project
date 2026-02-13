@@ -64,7 +64,7 @@ const AdminPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950 py-10 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="md:flex md:items-center md:justify-between mb-8">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-6">
           <div className="flex-1 min-w-0">
             <h2 className="text-2xl font-bold leading-7 text-gray-900 dark:text-white sm:text-3xl sm:truncate font-serif">
               Knowledge Base Management
@@ -73,7 +73,7 @@ const AdminPage: React.FC = () => {
               Manage the documents the AI uses to answer user questions.
             </p>
           </div>
-          <div className="mt-4 flex md:mt-0 md:ml-4 gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <input
               type="file"
               ref={fileInputRef}
@@ -81,22 +81,22 @@ const AdminPage: React.FC = () => {
               className="hidden"
               accept=".pdf,.txt"
             />
-      <button
-        onClick={() => fileInputRef.current?.click()}
-        disabled={isLoading}
-        className="inline-flex items-center px-4 py-2 border border-amber-500 rounded-md shadow-sm text-sm font-medium text-amber-600 dark:text-amber-400 bg-white dark:bg-slate-900 hover:bg-amber-50 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors disabled:opacity-50"
-      >
-        {isLoading ? (
-          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-        ) : (
-          <Upload className="w-4 h-4 mr-2" />
-        )}
-        {isLoading ? 'Uploading...' : 'Upload File'}
-      </button>
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              disabled={isLoading}
+              className="flex-1 sm:flex-none inline-flex items-center justify-center px-4 py-2 border border-amber-500 rounded-md shadow-sm text-sm font-medium text-amber-600 dark:text-amber-400 bg-white dark:bg-slate-900 hover:bg-amber-50 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors disabled:opacity-50"
+            >
+              {isLoading ? (
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              ) : (
+                <Upload className="w-4 h-4 mr-2" />
+              )}
+              {isLoading ? 'Uploading...' : 'Upload File'}
+            </button>
             <button
               onClick={() => setIsAdding(!isAdding)}
               disabled={isLoading}
-              className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-slate-900 bg-amber-400 hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors disabled:opacity-50"
+              className="flex-1 sm:flex-none inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-slate-900 bg-amber-400 hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors disabled:opacity-50"
             >
               {isAdding ? 'Cancel' : (
                 <>
@@ -109,14 +109,14 @@ const AdminPage: React.FC = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 mb-8">
-          <div className="bg-white dark:bg-slate-900 overflow-hidden shadow rounded-lg border border-gray-100 dark:border-slate-800 transition-colors duration-300">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-8">
+          <div className="bg-white dark:bg-slate-900 overflow-hidden shadow-lg rounded-2xl border border-gray-100 dark:border-slate-800 transition-colors duration-300">
             <div className="px-4 py-5 sm:p-6">
-              <dt className="text-sm font-medium text-gray-500 dark:text-slate-400 truncate flex items-center gap-2">
-                <Database className="w-4 h-4" />
+              <dt className="text-sm font-medium text-gray-500 dark:text-slate-400 truncate flex items-center gap-2 mb-2">
+                <Database className="w-4 h-4 text-amber-500" />
                 Total Documents
               </dt>
-              <dd className="mt-1 text-3xl font-semibold text-gray-900 dark:text-white">
+              <dd className="text-3xl font-bold text-gray-900 dark:text-white">
                 {documents.length}
               </dd>
             </div>
