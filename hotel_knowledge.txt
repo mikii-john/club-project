@@ -1,0 +1,38 @@
+# Grand Horizon Hotel - Knowledge Base Document
+
+## General Information
+- **Hotel Name:** Grand Horizon Hotel
+- **Location:** 123 Skyview Boulevard, Horizon City
+- **Contact Number:** +1 (555) 123-4567
+- **Email:** stay@grandhorizon.com
+- **Website:** www.grandhorizon.com
+
+## Check-in & Check-out
+- **Check-in Time:** 3:00 PM
+- **Check-out Time:** 11:00 AM
+- **Early Check-in/Late Check-out:** Subject to availability and may incur a fee of $50.
+
+## Dining Options
+- **The Azure (Fine Dining):** Open 6:00 PM - 11:00 PM. Mediterranean fusion. Reservation recommended.
+- **Sunrise Café (Breakfast & Brunch):** Open 6:30 AM - 2:00 PM.
+- **Skyline Lounge (Cocktails & Tapas):** Open 4:00 PM - 1:00 AM. Located on the 25th floor.
+
+## Amenities
+- **Pool:** Infinity pool on the roof. Open daily from 7:00 AM to 10:00 PM.
+- **Gym:** 24/7 access with guest key card. Located on the 2nd floor.
+- **Spa:** Full-service spa open 9:00 AM to 8:00 PM. Appointments required.
+
+## Hotel Policies
+- **Smoking:** 100% Non-smoking facility. A $250 cleaning fee applies to smoking in rooms.
+- **Pets:** Service animals only. No other pets allowed.
+- **Cancellation Policy:** Free cancellation up to 48 hours before arrival.
+
+## Local Attractions
+- **Horizon City Park:** 5-minute walk.
+- **Grand Horizon Mall:** 15-minute walk or 5-minute drive.
+- **Skyview Observatory:** 10-minute drive.
+
+## Wi-Fi
+- **Network Name:** GrandHorizon_Guest
+- **Password:** horizon2026
+- High-speed internet is complimentary for all guests.
