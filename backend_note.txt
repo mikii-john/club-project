@@ -1,0 +1,70 @@
+ 🏗️ Backend Architecture: Grand Horizon Hotel
+
+The Grand Horizon Hotel project follows a modern Serverless/BaaS (Backend-as-a-Service) architecture, primarily utilizing Supabase for infrastructure and Google Gemini AI for intelligence.
+
+
+
+1. Core Infrastructure: Supabase
+Supabase provides the foundation for data, security, and real-time features.
+
+🔐 Authentication
+- Service: Supabase Auth
+- Methods: Email/Password and OAuth (Google).
+- Session Management: Handled via JWTs stored in local storage and session storage.
+- Admin Access: Controlled through a dedicated isAdminAuthenticated flag and a specific ADMIN_EMAIL check.
+
+🗄️ Database (PostgreSQL)
+We use a relational database with several key tables:
+- documents: Tracks uploaded knowledge files (PDF/TXT).
+- document_chunks: Stores the actual text content broken into pieces.
+- chat_history: Persists conversations for each user.
+
+
+
+2. The AI Brain: RAG System
+The most advanced part of the backend is the Retrieval-Augmented Generation (RAG) pipeline.
+
+🧠 Embedding Layer
+- Model: gemini-embedding-001
+- Process: When a document is uploaded, we convert the text into a 768-dimensional vector (a list of numbers representing the "meaning" of the text).
+
+🔍 Vector Search (pgvector)
+- We use the pgvector extension in Supabase.
+- RPC Search: We use a PostgreSQL function called match_documents to find the most relevant chunks of text based on "cosine similarity" between the user's question and the stored document vectors.
+
+💬 Generation Layer
+- Model: gemini-1.5-flash
+- Process: 
+  1. User asks a question.
+  2. System searches the Vector DB for context.
+  3. System sends the context + question to Gemini.
+  4. Gemini generates a response restricted only to the provided hotel knowledge.
+
+
+
+3. Data Flow Diagram (RAG Process)
+
+[ Guest Question ]
+       |
+       v
+[ Google Gemini Embedding API ] ----> Converts text to numbers (Vectors)
+       |
+       v
+[ Supabase Vector Database ] -------> Searches for matching hotel info
+       |
+       v
+[ Relevant Context Found ] ---------> (e.g., "Pool opens at 9 AM")
+       |
+       v
+[ Google Gemini 1.5 Flash ] --------> Combines Question + Context
+       |
+       v
+[ Final Polite Answer ] ------------> (e.g., "Our pool opens at 9 AM! 🌴")
+
+
+
+4. Key Backend Services
+- authService.ts: Handles logins, signups, and OAuth.
+- documentService.ts: Manages file uploads, PDF text extraction, and storage.
+- geminiService.ts: Orchestrates the AI logic (embeddings + RAG responses).
+- chatService.ts: Handles the persistence of chat messages in Supabase.

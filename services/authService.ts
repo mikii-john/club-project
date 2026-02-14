@@ -125,3 +125,17 @@ export const signInWithFacebook = async (): Promise<void> => {
   
   console.log('[AuthService] Facebook OAuth initiated successfully', data);
 };
+
+export const updatePassword = async (newPassword: string): Promise<void> => {
+  console.log('[AuthService] Attempting to update password...');
+  const { error } = await supabase.auth.updateUser({
+    password: newPassword,
+  });
+
+  if (error) {
+    console.error('[AuthService] Update password error:', error.message);
+    throw error;
+  }
+  
+  console.log('[AuthService] Password updated successfully');
+};

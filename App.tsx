@@ -6,6 +6,7 @@ import AdminPage from './pages/AdminPage';
 import LoginPage from './pages/LoginPage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import SignupPage from './pages/SignupPage';
+import ChangePasswordPage from './pages/ChangePasswordPage';
 import { getStoredUser } from './services/authService';
 import { supabase } from './services/supabaseClient';
 import { User } from './types';
@@ -88,6 +89,11 @@ const App: React.FC = () => {
             <Route 
               path="/" 
               element={user ? <LandingPage /> : <Navigate to="/login" />} 
+            />
+            
+            <Route 
+              path="/change-password" 
+              element={user ? <ChangePasswordPage /> : <Navigate to="/login" />} 
             />
             
             <Route 
