@@ -1,17 +1,6 @@
 
-
-
 # admin email: milkesayohanes@gmail.com
 # password: 12345678
-
-
-This contains everything you need to run your app locally.
-
-
-
-## Run Locally
-
-**Prerequisites:**  Node.js
 
 
 1. Install dependencies:
