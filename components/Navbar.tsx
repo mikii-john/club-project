@@ -61,7 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({ user, setUser }) => {
                     <Home className="w-4 h-4" />
                     <span>Guest Home</span>
                   </Link>
-                  {user.email === ADMIN_EMAIL && (
+                  {user.isAdminAuthenticated && (
                     <Link 
                       to="/admin" 
                       className={`px-3 py-2 rounded-full text-sm font-medium flex items-center gap-2 transition-all ${isActive('/admin') ? 'text-slate-900 bg-slate-100 dark:text-white dark:bg-slate-800' : 'text-gray-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800'}`}
@@ -116,7 +116,7 @@ const Navbar: React.FC<NavbarProps> = ({ user, setUser }) => {
               <Home className="w-5 h-5" />
               Guest Home
             </Link>
-            {user.email === ADMIN_EMAIL && (
+            {user.isAdminAuthenticated && (
               <Link 
                 to="/admin" 
                 onClick={() => setIsMenuOpen(false)}

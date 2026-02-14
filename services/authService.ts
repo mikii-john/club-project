@@ -1,7 +1,9 @@
 import { supabase } from './supabaseClient';
 import { User } from '../types';
+import { ADMIN_PASSWORD } from '../constants';
 
 export const getStoredUser = async (): Promise<User | null> => {
+
   const { data: { session }, error } = await supabase.auth.getSession();
   if (error || !session) return null;
   
@@ -16,7 +18,7 @@ export const login = async (email: string, password?: string): Promise<User> => 
   console.log(`[AuthService] Attempting login for: ${email}`);
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
-    password: password || '12345678',
+    password: password || ADMIN_PASSWORD,
   });
 
   if (error) {
@@ -41,7 +43,7 @@ export const signup = async (username: string, email: string, password?: string)
   console.log(`[AuthService] Attempting signup for: ${email}`);
   const { data, error } = await supabase.auth.signUp({
     email,
-    password: password || '12345678',
+    password: password || ADMIN_PASSWORD,
     options: {
       data: {
         username: username,

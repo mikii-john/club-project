@@ -22,7 +22,9 @@ const App: React.FC = () => {
     const checkUser = async () => {
       const storedUser = await getStoredUser();
       if (storedUser) {
-        setUser(storedUser);
+        // Check if admin was authenticated in this session
+        const isAdminAuth = sessionStorage.getItem('isAdminAuthenticated') === 'true';
+        setUser({ ...storedUser, isAdminAuthenticated: isAdminAuth });
       }
       setIsLoading(false);
     };
@@ -32,14 +34,18 @@ const App: React.FC = () => {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (event === 'SIGNED_IN' && session) {
+        // Re-check session storage on sign in
+        const isAdminAuth = sessionStorage.getItem('isAdminAuthenticated') === 'true';
         const currentUser: User = {
           id: session.user.id,
           username: session.user.user_metadata.username || session.user.email?.split('@')[0],
           email: session.user.email || '',
+          isAdminAuthenticated: isAdminAuth
         };
         setUser(currentUser);
       } else if (event === 'SIGNED_OUT') {
         setUser(null);
+        sessionStorage.removeItem('isAdminAuthenticated');
       }
     });
 
@@ -70,7 +76,7 @@ const App: React.FC = () => {
             
             <Route 
               path="/admin/login" 
-              element={user && user.email === ADMIN_EMAIL ? <Navigate to="/admin" /> : <AdminLoginPage setUser={setUser} />} 
+              element={user && user.isAdminAuthenticated ? <Navigate to="/admin" /> : <AdminLoginPage setUser={(u) => setUser({ ...u, isAdminAuthenticated: true })} />} 
             />
 
             <Route 
@@ -81,12 +87,12 @@ const App: React.FC = () => {
             {/* Protected Routes */}
             <Route 
               path="/" 
-              element={user ? (user.email === ADMIN_EMAIL ? <Navigate to="/admin" /> : <LandingPage />) : <Navigate to="/login" />} 
+              element={user ? <LandingPage /> : <Navigate to="/login" />} 
             />
             
             <Route 
               path="/admin" 
-              element={user && user.email === ADMIN_EMAIL ? <AdminPage /> : <Navigate to="/" />} 
+              element={user && user.isAdminAuthenticated ? <AdminPage /> : <Navigate to="/admin/login" />} 
             />
           </Routes>
         </div>

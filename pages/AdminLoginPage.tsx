@@ -23,6 +23,7 @@ const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ setUser }) => {
       const user = await login(email, password);
       // Strict check for admin email
       if (user.email === 'milkesayohanes@gmail.com') {
+        sessionStorage.setItem('isAdminAuthenticated', 'true');
         setUser(user);
         navigate('/admin');
       } else {
