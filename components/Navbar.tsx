@@ -17,9 +17,17 @@ const Navbar: React.FC<NavbarProps> = ({ user, setUser }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogout = async () => {
-    await logout();
-    setUser(null);
-    navigate('/login');
+    if (location.pathname.startsWith('/admin') && user && user.isAdminAuthenticated) {
+      // Exit Management Mode but keep the guest session active
+      sessionStorage.removeItem('isAdminAuthenticated');
+      setUser({ ...user, isAdminAuthenticated: false });
+      navigate('/');
+    } else {
+      // Full Logout for guests or when not in management mode
+      await logout();
+      setUser(null);
+      navigate('/login');
+    }
     setIsMenuOpen(false);
   };
 
